@@ -11,9 +11,7 @@ package Main;
  */
 public class main {
 
-    /**
-     * @param args the command line arguments
-     */
+    int alefirucho;
     public static void main(String[] args) {
         // TODO code application logic here
         //superf
