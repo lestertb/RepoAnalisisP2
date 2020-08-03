@@ -77,7 +77,7 @@ public class MetodosGrafo {
                 System.out.println("destino:"+ j);
                 System.out.println("---------------");
                 //le inserta un peso random al arco
-                int num = (int) (Math.random() * 90) + 1;
+                int num = (int) (Math.random() * 99) + 1;
                 //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
                 insertarArco(i, j, num);
             }
@@ -143,5 +143,11 @@ public class MetodosGrafo {
         }
         return cont;
     }    
+    
+    //Ruta corta del vértice inicial (1) al vértice final (N),
+    //donde la suma de los pesos de los arcos que conforman la
+    //ruta sea la menor (algoritmo de optimización).
+    
+    
     
 }
