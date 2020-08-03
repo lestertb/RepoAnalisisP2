@@ -5,16 +5,26 @@
  */
 package Main;
 
+import Grafo.MetodosGrafo;
+
 /**
  *
  * @author Lester Trejos
  */
 public class main {
-
-    int alefirucho;
+    
+    static MetodosGrafo mg = new MetodosGrafo();
     public static void main(String[] args) {
-        // TODO code application logic here
-        //superf
+        
+        medicionGrafo();    
+        
+        
+    }
+    
+    static void medicionGrafo() {//medicion de los datos del grafos
+        System.out.println("------------Grafo--------------");
+         //Datos de entrada
+        mg.insertAutomatico(5); 
     }
     
 }
