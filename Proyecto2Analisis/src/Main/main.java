@@ -20,7 +20,7 @@ public class main {
     
     public static void main(String[] args) {
         //  Tamaño del grafo
-        int tamaño = 100;
+        int tamaño = 3;
         crearGrafo(tamaño);
         graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
         
@@ -29,24 +29,28 @@ public class main {
     
     public static void crearGrafo(int n){
         
-        for (int i = 1; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
            NodeWeighted vt = new NodeWeighted(i);
            test.add(vt);     
         }
         
         for (int i = 0; i < n; i++) {//orgien
             for (int j = 1; j < n; j++) {//destino
-                if (i==n-1) {
+                if (i == n-1) {
                     break;
                 }
-                //System.out.println("Orgien:"+i);
-                //System.out.println("destino:"+ j);
+                if (i != j) {//Inserta sin ciclos
+                System.out.println("Orgien:"+i);
+                System.out.println("destino:"+ j);
                 //le inserta un peso random al arco
                 int num = (int) (Math.random() * 99) + 1;
                 //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
-                //System.out.println("Peso:"+num);
-                //System.out.println("---------------");
+                System.out.println("Peso:"+num);
+                System.out.println("---------------");
                 graphWeighted.addEdge(test.get(i), test.get(j), num);
+                    
+                }
+                
             }
 
         }
