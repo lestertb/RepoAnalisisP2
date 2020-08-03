@@ -5,7 +5,8 @@
  */
 package Main;
 
-import Grafo.MetodosGrafo;
+import Grafo.*;
+import java.util.*;
 
 /**
  *
@@ -13,18 +14,44 @@ import Grafo.MetodosGrafo;
  */
 public class main {
     
-    static MetodosGrafo mg = new MetodosGrafo();
+   static GraphWeighted graphWeighted = new GraphWeighted(true);
+   
+   static  ArrayList<NodeWeighted> test = new ArrayList<>();
+    
     public static void main(String[] args) {
-        
-        medicionGrafo();    
+        //  Tamaño del grafo
+        int tamaño = 100;
+        crearGrafo(tamaño);
+        graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
         
         
     }
     
-    static void medicionGrafo() {//medicion de los datos del grafos
-        System.out.println("------------Grafo--------------");
-         //Datos de entrada
-        mg.insertAutomatico(5); 
+    public static void crearGrafo(int n){
+        
+        for (int i = 1; i <= n; i++) {
+           NodeWeighted vt = new NodeWeighted(i);
+           test.add(vt);     
+        }
+        
+        for (int i = 0; i < n; i++) {//orgien
+            for (int j = 1; j < n; j++) {//destino
+                if (i==n-1) {
+                    break;
+                }
+                //System.out.println("Orgien:"+i);
+                //System.out.println("destino:"+ j);
+                //le inserta un peso random al arco
+                int num = (int) (Math.random() * 99) + 1;
+                //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
+                //System.out.println("Peso:"+num);
+                //System.out.println("---------------");
+                graphWeighted.addEdge(test.get(i), test.get(j), num);
+            }
+
+        }
+    
     }
+    
     
 }
