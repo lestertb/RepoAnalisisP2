@@ -6,6 +6,7 @@
 package Main;
 
 import Grafo.*;
+import java.util.*;
 
 /**
  *
@@ -13,34 +14,43 @@ import Grafo.*;
  */
 public class main {
     
+   static GraphWeighted graphWeighted = new GraphWeighted(true);
    
+   static  ArrayList<NodeWeighted> test = new ArrayList<>();
     
     public static void main(String[] args) {
+        //  Tamaño del grafo
+        int tamaño = 20;
+        crearGrafo(tamaño);
+        graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
         
-        GraphWeighted graphWeighted = new GraphWeighted(true);
         
-        NodeWeighted zero = new NodeWeighted(0);
-        NodeWeighted one = new NodeWeighted(1);
-        NodeWeighted two = new NodeWeighted(2);
-        NodeWeighted three = new NodeWeighted(3);
-        NodeWeighted four = new NodeWeighted(4);
-        NodeWeighted five = new NodeWeighted(5);
-        NodeWeighted six = new NodeWeighted(6);
+    }
+    
+    public static void crearGrafo(int n){
+        
+        for (int i = 1; i <= n; i++) {
+           NodeWeighted vt = new NodeWeighted(i);
+           test.add(vt);     
+        }
+        
+        for (int i = 0; i < n; i++) {//orgien
+            for (int j = 1; j < n; j++) {//destino
+                if (i==n-1) {
+                    break;
+                }
+                System.out.println("Orgien:"+i);
+                System.out.println("destino:"+ j);
+                //le inserta un peso random al arco
+                int num = (int) (Math.random() * 99) + 1;
+                //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
+                System.out.println("Peso:"+num);
+                System.out.println("---------------");
+                graphWeighted.addEdge(test.get(i), test.get(j), num);
+            }
 
-        graphWeighted.addEdge(zero, one, 8);
-        graphWeighted.addEdge(zero, two, 11);
-        graphWeighted.addEdge(one, three, 3);
-        graphWeighted.addEdge(one, four, 8);
-        graphWeighted.addEdge(one, two, 7);
-        graphWeighted.addEdge(two, four, 9);
-        graphWeighted.addEdge(three, four, 5);
-        graphWeighted.addEdge(three, five, 2);
-        graphWeighted.addEdge(four, six, 6);
-        graphWeighted.addEdge(five, four, 1);
-        graphWeighted.addEdge(five, six, 8);
-
-        graphWeighted.DijkstraShortestPath(zero, six);
-        
+        }
+    
     }
     
     

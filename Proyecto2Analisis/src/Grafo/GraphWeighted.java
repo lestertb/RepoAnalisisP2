@@ -13,6 +13,7 @@ import java.util.*;
  */
 public class GraphWeighted {
     
+    
     public Set<NodeWeighted> nodes;
     public boolean directed;
 
