@@ -5,6 +5,7 @@
  */
 package Main;
 
+import BranchBound.MetodosGrafo;
 import Grafo.*;
 import java.util.*;
 
@@ -15,17 +16,61 @@ import java.util.*;
 public class main {
     
    static GraphWeighted graphWeighted = new GraphWeighted(true);
+
+   static MetodosGrafo mg = new MetodosGrafo();
    
    static  ArrayList<NodeWeighted> test = new ArrayList<>();
     
     public static void main(String[] args) {
-        //  Tamaño del grafo
-        int tamaño = 100;
-        crearGrafo(tamaño);
-        graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
+
+        
+        mg.insertAutomatico(1000);
+        mg.genetico(mg.buscar(0), 1000,0);
+        mg.backtracking(mg.buscar(0));
+        
+   }
+    
+    
+    
+    
+
         
         
-    }
+
+
+
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public static void crearGrafo(int n){
         
