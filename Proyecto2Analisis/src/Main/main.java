@@ -20,10 +20,9 @@ public class main {
     
     public static void main(String[] args) {
         //  Tamaño del grafo
-        int tamaño = 3;
+        int tamaño = 20;
         crearGrafo(tamaño);
         graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
-        
         
     }
     
