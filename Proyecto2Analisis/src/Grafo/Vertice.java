@@ -11,19 +11,17 @@ import java.util.*;
  *
  * @author Lester Trejos
  */
-public class NodeWeighted {
+public class Vertice {
     
-    // The int n and String name are just arbitrary attributes
-    // we've chosen for our nodes these attributes can of course
-    // be whatever you need
-    public int n;
-    public boolean visited;
-    public LinkedList<EdgeWeighted> edges;
-
-    public NodeWeighted(int n) {
-        this.n = n;
+    //Globales
+    public int id;//Indentificador
+    public boolean visited;// se visitó?
+    public LinkedList<Arco> arcos;
+    //Constructor
+    public Vertice(int n) {
+        this.id = n;
         visited = false;
-        edges = new LinkedList<>();
+        arcos = new LinkedList<>();
     }
 
     boolean isVisited() {
@@ -37,5 +35,11 @@ public class NodeWeighted {
     void unvisit() {
         visited = false;
     }
+    
+    class subset 
+    { 
+        int parent, rank; 
+    }; 
+  
     
 }

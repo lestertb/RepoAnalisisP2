@@ -14,25 +14,29 @@ import java.util.*;
  */
 public class main {
     
-   static GraphWeighted graphWeighted = new GraphWeighted(true);
-   
-   static  ArrayList<NodeWeighted> test = new ArrayList<>();
+   //Variables Globales 
     
+   //Clase con los métodos del grafo
+   static MetodosGrafo graphWeighted = new MetodosGrafo(true);
+   //Array list para los nodos del grafo
+   static  ArrayList<Vertice> Vertices = new ArrayList<>();
+    //Método main
     public static void main(String[] args) {
-        //  Tamaño del grafo
+        //amaño del grafo
         int tamaño = 20;
         crearGrafo(tamaño);
-        graphWeighted.DijkstraShortestPath(test.get(0), test.get(tamaño-1));
+        //Aplicar el agoritmo Dijkstra
+        graphWeighted.DijkstraShortestPath(Vertices.get(0), Vertices.get(tamaño-1));
         
     }
-    
+    //Método que crea el grafo conexo con la unión de sus respectivos arcos
     public static void crearGrafo(int n){
-        
+        //Crea los vertices y de le asigna un valor
         for (int i = 0; i < n; i++) {
-           NodeWeighted vt = new NodeWeighted(i);
-           test.add(vt);     
+           Vertice vt = new Vertice(i);
+           Vertices.add(vt);     
         }
-        
+        //Se conectan los arcos (origen, destino)
         for (int i = 0; i < n; i++) {//orgien
             for (int j = 1; j < n; j++) {//destino
                 if (i == n-1) {
@@ -46,7 +50,7 @@ public class main {
                 //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
                 System.out.println("Peso:"+num);
                 System.out.println("---------------");
-                graphWeighted.addEdge(test.get(i), test.get(j), num);
+                graphWeighted.agregarArco(Vertices.get(i), Vertices.get(j), num);
                     
                 }
                 
