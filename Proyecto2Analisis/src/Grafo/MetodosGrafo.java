@@ -14,23 +14,25 @@ import java.util.*;
 public class MetodosGrafo {
     
     //Globals
-    public Set<Vertice> vertices;
+    public Set<Vertice> arcos;
     public boolean directed;
+    //Global para el génetico
+    static  ArrayList<Integer> hechos = new ArrayList<>();
 
     public MetodosGrafo(boolean directed) {
         this.directed = directed;
-        vertices = new HashSet<>();
+        arcos = new HashSet<>();
     }
-    //Agregar vertices
+    //Agregar arcos
     public void agregarVertice(Vertice... n) {
 
-        vertices.addAll(Arrays.asList(n));
+        arcos.addAll(Arrays.asList(n));
     }
-    //Agregar Arco entre los vertices
+    //Agregar Arco entre los arcos
     public void agregarArco(Vertice origen, Vertice destino, double peso) {
 
-        vertices.add(origen);
-        vertices.add(destino);
+        arcos.add(origen);
+        arcos.add(destino);
 
         agregarArcoHelper(origen, destino, peso);
 
@@ -51,14 +53,14 @@ public class MetodosGrafo {
     }
     //Imprime los Arcos
     public void printArcos() {
-        for (Vertice node : vertices) {
-            LinkedList<Arco> edges = node.arcos;
+        for (Vertice vertice : arcos) {
+            LinkedList<Arco> edges = vertice.arcos;
 
             if (edges.isEmpty()) {
-                System.out.println("Node:" + node.id + " has no edges.");
+                System.out.println("Node:" + vertice.id + " no tiene arco.");
                 continue;
             }
-            System.out.print("Node: " + node.id + " has edges to: ");
+            System.out.print("Node: " + vertice.id + " tiene arco con: ");
 
             for (Arco edge : edges) {
                 System.out.print(edge.destino.id + "(" + edge.peso + ") ");
@@ -66,7 +68,7 @@ public class MetodosGrafo {
             System.out.println();
         }
     }
-    //Verifica si 2 vertices tienen arco (Conexo)
+    //Verifica si 2 arcos tienen arco (Conexo)
     public boolean tieneArco(Vertice origen, Vertice destino) {
         LinkedList<Arco> edges = origen.arcos;
         for (Arco edge : edges) {
@@ -76,14 +78,15 @@ public class MetodosGrafo {
         }
         return false;
     }
-    //Resetea todos los vertices en no visitados
+    //Resetea todos los arcos en no visitados
     public void resetVerticesVisited() {
-        for (Vertice node : vertices) {
+        for (Vertice node : arcos) {
             node.unvisit();
         }
     }
     
     //Voraz
+    
     
     
     //Progra Dinamica
@@ -97,7 +100,7 @@ public class MetodosGrafo {
 
         // Establecer el peso de la ruta más corta de cada vertice en infinito positivo para inicio
         // excepto el nodo inicial, cuyo peso de ruta más corto es 0
-        for (Vertice node : vertices) {
+        for (Vertice node : arcos) {
             if (node == inicio)
                 shortestPathMap.put(inicio, 0.0);
             else shortestPathMap.put(node, Double.POSITIVE_INFINITY);
@@ -146,7 +149,7 @@ public class MetodosGrafo {
                     hijo = padre;
                 }
                 System.out.println(path);
-                System.out.println("The path costs: " + shortestPathMap.get(fin));
+                System.out.println("Peso total ruta minima: " + shortestPathMap.get(fin));
                 return;
             }
             currentNode.visit();
@@ -173,7 +176,7 @@ public class MetodosGrafo {
 
         double menorDistancia = Double.POSITIVE_INFINITY;
         Vertice verticeAccesibleMasCercano = null;
-        for (Vertice node : vertices) {
+        for (Vertice node : arcos) {
             if (node.isVisited())
                 continue;
 
@@ -189,5 +192,52 @@ public class MetodosGrafo {
         return verticeAccesibleMasCercano;
     }
     
+    //Busca si existe
+    public Vertice buscar(ArrayList<Vertice> listaVertices,int id) {
+        for (Vertice vertice : listaVertices) {
+            if (vertice.id == id) {
+                return vertice;
+            }
+        }
+        System.out.println("-----Vertice NO encontrado-----");
+        return null;
+    }
+    
+    //Génetico
+    public void genetico(Vertice grafo, int cant, ArrayList<Vertice> listaVertices)
+    {
+        System.out.println(grafo.id);
+        if ((grafo == null) | (grafo.visited == true)|(grafo.id==cant-1)) {//condiciones de parada
+            return;
+        }
+        else {
+            int num = (int) (Math.random() * cant-1) + 1;
+            Vertice n = buscar(listaVertices,num);
+            boolean k = true;
+            while(k==true)
+            {
+                num = (int) (Math.random() * cant-1) + 1;
+                n = buscar(listaVertices,num);
+                k=false;
 
+                for (int x: hechos)
+                {
+                    if (x==num) {
+                        k=true;
+                    }
+                } 
+            }
+            hechos.add(num);
+            genetico(n, cant,listaVertices);
+            }
+     }
+    
+    //BackTracking
+    public void hamCircuit(Vertice grafo, int total){
+        
+        int v = grafo.id;
+        
+        int path[] = new int[v];
+        
+    }
 }
