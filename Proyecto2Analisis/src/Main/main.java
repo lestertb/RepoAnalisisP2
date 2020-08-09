@@ -26,6 +26,12 @@ public class main {
         //Tamaño del grafo
         int tamaño = 10;
         crearGrafo(tamaño);
+        
+        //Voraz
+        
+        System.out.println("------------------Voraz------------------"); 
+        mg.voraz(Vertices.get(0),Vertices.get(tamaño-1),tamaño);
+        
         //Aplicar el algoritmo Dijkstra
         System.out.println("------------------Dijkstra------------------");
         mg.DijkstraShortestPath(Vertices.get(0), Vertices.get(tamaño-1));
@@ -42,11 +48,8 @@ public class main {
         System.out.println("------------------BackTracking------------------");
         
         //Aplicar el algoritmo BackTracking
+
         
-        
-        
-        
-        //mg.printArcos();
         
     }
     //Método que crea el grafo conexo con la unión de sus respectivos arcos
@@ -71,13 +74,11 @@ public class main {
                 //System.out.println("Peso:"+num);
                 //System.out.println("---------------");
                 mg.agregarArco(Vertices.get(i), Vertices.get(j), num);
-                    
                 }
-                
             }
 
         }
-    
+        
     }
     
     
