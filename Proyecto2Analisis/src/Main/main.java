@@ -17,16 +17,39 @@ public class main {
    //Variables Globales 
     
    //Clase con los métodos del grafo
-   static MetodosGrafo graphWeighted = new MetodosGrafo(true);
+   static MetodosGrafo mg = new MetodosGrafo(true);
+   
    //Array list para los nodos del grafo
    static  ArrayList<Vertice> Vertices = new ArrayList<>();
     //Método main
     public static void main(String[] args) {
-        //amaño del grafo
-        int tamaño = 20;
+        //Tamaño del grafo
+        int tamaño = 10;
         crearGrafo(tamaño);
-        //Aplicar el agoritmo Dijkstra
-        graphWeighted.DijkstraShortestPath(Vertices.get(0), Vertices.get(tamaño-1));
+        
+        //Voraz
+        
+        System.out.println("------------------Voraz------------------"); 
+        mg.voraz(Vertices.get(0),Vertices.get(tamaño-1),tamaño);
+        
+        //Aplicar el algoritmo Dijkstra
+        System.out.println("------------------Dijkstra------------------");
+        mg.DijkstraShortestPath(Vertices.get(0), Vertices.get(tamaño-1));
+        
+        mg.resetVerticesVisited();
+        
+        System.out.println("------------------Genetico------------------");
+        
+        //Aplicar el algoritmo genetico
+        mg.genetico(mg.buscar(Vertices,0),tamaño,Vertices);
+        
+        mg.resetVerticesVisited();
+        
+        System.out.println("------------------BackTracking------------------");
+        
+        //Aplicar el algoritmo BackTracking
+
+        
         
     }
     //Método que crea el grafo conexo con la unión de sus respectivos arcos
@@ -43,21 +66,19 @@ public class main {
                     break;
                 }
                 if (i != j) {//Inserta sin ciclos
-                System.out.println("Orgien:"+i);
-                System.out.println("destino:"+ j);
+                //System.out.println("Orgien:"+i);
+                //System.out.println("destino:"+ j);
                 //le inserta un peso random al arco
                 int num = (int) (Math.random() * 99) + 1;
                 //inserta del vertice A al vertice B con el peso y así con el resto hasta ser conexo total
-                System.out.println("Peso:"+num);
-                System.out.println("---------------");
-                graphWeighted.agregarArco(Vertices.get(i), Vertices.get(j), num);
-                    
+                //System.out.println("Peso:"+num);
+                //System.out.println("---------------");
+                mg.agregarArco(Vertices.get(i), Vertices.get(j), num);
                 }
-                
             }
 
         }
-    
+        
     }
     
     
