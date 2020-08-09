@@ -23,10 +23,26 @@ public class main {
     
     public static void main(String[] args) {
 
+        int tamano = 50;
+        mg.insertAutomatico(tamano);
+        int poblacion = (int) (Math.random() * tamano-1) + 1;
+        System.out.println("poblacion: "+poblacion);
         
-        mg.insertAutomatico(1000);
-        mg.genetico(mg.buscar(0), 1000,0);
-        mg.backtracking(mg.buscar(0));
+        mg.cruceGenetico(mg.buscar(0), tamano,poblacion);
+        
+        System.out.println("-----------------------------------------------------------------");
+        //mg.ramiPoda(mg.buscar(0), mg.buscar(tamano-1), "", 0);
+        //mg.var2();
+       
+        System.out.println("------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
+        
+        
+        //mg.backtracking(mg.buscar(0), mg.buscar(tamano-1), "", 0);
+        //mg.var();
+        
+        //mg.backtracking(mg.buscar(0));
+        //mg.gradoExterno(mg.buscar(0));
         
    }
     
