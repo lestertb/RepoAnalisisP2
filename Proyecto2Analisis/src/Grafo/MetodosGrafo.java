@@ -17,16 +17,26 @@ public class MetodosGrafo {
     public Set<Vertice> arcos;
     public boolean directed;
 
-    //Global para el génetico
-    static ArrayList<Integer> hechos = new ArrayList<>();
+    //Globals para el génetico
+    public static ArrayList<Integer> hechos = new ArrayList<>();
+    
+    //Globals para el ramificación y poda
+    public String rutaMenor2 = "";
+    public int menorValor2 = 0;
+    public int max =0;
+    public ArrayList<String> podas = new ArrayList<>();
 
     //Global para el BackTracking
+    public String rutaMenor = "";
+    public int menorValor = 0;
+    
+    
     public MetodosGrafo(boolean directed) {
         this.directed = directed;
         arcos = new HashSet<>();
     }
 
-    //Agregar arcos
+    //Agregar vertices
     public void agregarVertice(Vertice... n) {
 
         arcos.addAll(Arrays.asList(n));
@@ -96,9 +106,7 @@ public class MetodosGrafo {
     //Voraz
     public void voraz(Vertice origen, Vertice destino, int tamaño) {
         Stack rutaVertice = new Stack();
-
         rutaVertice.push(origen);
-        
         while (!rutaVertice.isEmpty()) {
             Vertice vertice = (Vertice) rutaVertice.pop();
             double pesoActual = Double.MAX_VALUE;
@@ -243,31 +251,5 @@ public class MetodosGrafo {
         System.out.println("-----Vertice NO encontrado-----");
         return null;
     }
-
-    //Génetico
-    public void genetico(Vertice grafo, int cant, ArrayList<Vertice> listaVertices) {
-        System.out.println(grafo.id);
-        if ((grafo == null) | (grafo.visited == true) | (grafo.id == cant - 1)) {//condiciones de parada
-            return;
-        } else {
-            int num = (int) (Math.random() * cant - 1) + 1;
-            Vertice n = buscar(listaVertices, num);
-            boolean k = true;
-            while (k == true) {
-                num = (int) (Math.random() * cant - 1) + 1;
-                n = buscar(listaVertices, num);
-                k = false;
-
-                for (int x : hechos) {
-                    if (x == num) {
-                        k = true;
-                    }
-                }
-            }
-            hechos.add(num);
-            genetico(n, cant, listaVertices);
-        }
-    }
-
-    //BackTracking
+ 
 }
