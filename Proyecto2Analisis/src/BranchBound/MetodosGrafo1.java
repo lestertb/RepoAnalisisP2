@@ -451,24 +451,24 @@ public class MetodosGrafo1 {
     
     String rutaMenor = "";
     int menorValor = 0;
-    public void backtracking(Vertice1 origen, Vertice1 destino, String ruta, int dist) {
+    public void backtracking(Vertice1 actual, Vertice1 finalN, String ruta, int dist) {
         memoriaBacktraking+=32;
         comparacionesBack++;
         LineasBack++;
-        if ((origen == null) || (origen.visitado == true)) {
+        if ((actual == null) || (actual.visitado == true)) {
             LineasBack++;
             return;
         }
-        if (origen == destino) {
+        if (actual == finalN) {
             comparacionesBack++;
             LineasRamiyPoda++;
-            System.out.println("Ruta: " + ruta + destino.num);
-            System.out.println("Con una distancia de: " + dist);
+            System.out.println("Camino: " + ruta +" - "+ finalN.num);
+            System.out.println("Distancia: " + dist);
 
-            if (("".equals(rutaMenor)) || (menorValor > dist)) {
+            if ((menorValor > dist)||("".equals(rutaMenor)) ) {
                 comparacionesBack++;
                 LineasBack++;
-                rutaMenor = ruta + destino.num;
+                rutaMenor = ruta + finalN.num;
                 
                 asignacionesBack++;
                 LineasBack++;
@@ -483,23 +483,23 @@ public class MetodosGrafo1 {
             LineasBack++;
             return;
         }
-        origen.visitado = true;
+        actual.visitado = true;
         memoriaBacktraking+= 8;
         asignacionesBack++;
         LineasBack++;
-        Arco1 a = origen.subListaArcos;
+        Arco1 arco = actual.subListaArcos;
         asignacionesBack++;
         LineasBack++;
-        while (a != null) {
+        while (arco != null) {
             LineasBack++;
             comparacionesBack++;
             asignacionesBack++;
-            backtracking(a.destino, destino, (ruta + (origen.num)).toString(), dist + a.size);
-            a = a.sigA;
+            backtracking(arco.destino, finalN, (ruta + (actual.num)).toString(), dist + arco.size);
+            arco = arco.sigA;
             LineasBack++;
             asignacionesBack++;
         }
-        origen.visitado = false;
+        actual.visitado = false;
         memoriaBacktraking+= 8;
         LineasBack++;
         asignacionesBack++;
@@ -521,26 +521,26 @@ public class MetodosGrafo1 {
     String rutaMenor2 = "";
     int menorValor2 = 0;
     int max =0;
-    public void ramiPoda(Vertice1 origen, Vertice1 destino, String ruta, int dist) {
+    public void ramiPoda(Vertice1 actual, Vertice1 finalN, String ruta, int dist) {
         memoriaRamiyPoda+= 32;
         memoriaRamiyPoda+= 32;
         comparacionesRamiyPoda++;
         LineasRamiyPoda++;
-        if ((origen == null) || (origen.visitado == true)) {
+        if ((actual == null) || (actual.visitado == true)) {
             LineasRamiyPoda++;
             return;
         }
         
-        if (origen == destino) {
+        if (actual == finalN) {
             comparacionesRamiyPoda++;
             LineasRamiyPoda++;
-            System.out.println("Ruta: " + ruta + destino.num);
-            System.out.println("Con una distancia de: " + dist);
+            System.out.println("Camino: " + ruta +" - "+ finalN.num);
+            System.out.println("Distania: " + dist);
 
             if (("".equals(rutaMenor2)) || (menorValor2 > dist)) {
                 comparacionesRamiyPoda++;
                 LineasRamiyPoda++;
-                rutaMenor2 = ruta + destino.num;
+                rutaMenor2 = ruta + finalN.num;
                 
                 asignacionesRamiyPoda++;
                 LineasRamiyPoda++;
@@ -576,25 +576,25 @@ public class MetodosGrafo1 {
         }
         asignacionesRamiyPoda++;
         LineasRamiyPoda++;
-        origen.visitado = true;
+        actual.visitado = true;
         memoriaRamiyPoda+= 8;
          asignacionesRamiyPoda++;
         LineasRamiyPoda++;
-        Arco1 a = origen.subListaArcos;
+        Arco1 arco = actual.subListaArcos;
          asignacionesRamiyPoda++;
         LineasRamiyPoda++;
-        while (a != null) {
+        while (arco != null) {
              comparacionesRamiyPoda++;
              LineasRamiyPoda++;
              asignacionesRamiyPoda++;
-            ramiPoda(a.destino, destino, (ruta + (origen.num)).toString(), dist + a.size);
+            ramiPoda(arco.destino, finalN, (ruta + (actual.num)).toString(), dist + arco.size);
             LineasRamiyPoda++;
              asignacionesRamiyPoda++;
-            a = a.sigA;
+            arco = arco.sigA;
         }
         LineasRamiyPoda++;
         asignacionesRamiyPoda++;
-        origen.visitado = false;
+        actual.visitado = false;
         memoriaRamiyPoda+= 8;
     }
     
